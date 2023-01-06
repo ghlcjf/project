@@ -16,12 +16,7 @@ public class CommonExceptionHandler {
 		return "error/invalidate";  //에러페이지
 	}
 	
-	// 2. id에 존재하지 않는 번호를 받는 경우 에러 처리
-	@ExceptionHandler(MemberNotFoundException.class)
-	public String handlerMemberNotFoundException(MemberNotFoundException e) {
-		e.printStackTrace();
-		return "error/noMember"; //에러페이지
-	}
+	
 	
 	// 3. 일반적인 실행 예외 처리
 	@ExceptionHandler(RuntimeException.class)
@@ -30,7 +25,16 @@ public class CommonExceptionHandler {
 		return "error/commonException";
 	}
 	
-
+//id에러
+	//1.존재하지 않는 id일때 
+	@ExceptionHandler(MemberNotFoundException.class)
+	public String handlerMemberNotFoundException(MemberNotFoundException e) {
+		e.printStackTrace();
+		return "member/noMember"; //에러페이지로
+	}
+	
+	
+	
 	
 	
 	

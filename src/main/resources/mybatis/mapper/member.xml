@@ -72,6 +72,7 @@
 		FROM freeBoardTbl b INNER JOIN freeCommentTbl c
 		ON b.boardNum = c.boardNum
 		WHERE c.boardNum=#{boardNum}
+		ORDER BY c.commentNum ASC
 	</select>
 	<select id="selectAllFreeComment2" parameterType="String" resultType="freeComment">
 		SELECT c.* 
@@ -85,5 +86,90 @@
 		INSERT INTO freeCommentTbl
 		Values(FREECOMMENT_SEQ.nextval,#{boardNum},#{commentContent},#{name},sysdate)
 	</insert>
+	
+	
+	
+	<!-- 이슈 -->
+	<sql id="selectAllIssue">
+		SELECT * FROM issueTbl
+	</sql>
+	
+	<select id="selectAllIssueList" resultType="issue">
+		SELECT * FROM IssueTbl ORDER BY issueNum DESC
+	</select>										   
+
+	<select id="selectByIssueNum" resultType="issue">
+		<include refid="selectAllIssue" />
+		WHERE issueNum=#{issueNum}
+	</select>
+	
+	<update id="updateViewCount" parameterType="issue">
+		UPDATE issueTbl SET viewCount = #{viewCount}+1 WHERE issueNum=#{issueNum}
+	</update>
+
+	<select id="selectByIssue" resultType="issue">
+		<include refid="selectAllIssue" />
+		WHERE issueNum=#{issueNum}
+	</select>
+	
+	<select id="getIssueComments" resultType="issueComment">
+		SELECT c.*
+		FROM issueTbl i INNER JOIN issueCommentTbl c 
+		ON i.issueNum=c.boardNum
+		WHERE c.boardNum=#{issueNum} 	
+	</select>
+	<insert id="insertComment" parameterType="issueComment">
+		INSERT INTO issueCommentTbl
+		VALUES(ISSUECOMMENT_SEQ.nextval,#{boardNum},#{commentContent},#{name},sysdate);
+	</insert>
+	
+	
+	<!-- 동물 소개 -->
+	<select id="selectAllAniaml" resultType="animalInfo">
+		SELECT * FROM animalInfoTbl ORDER BY animalNum DESC
+	</select>
+	
+	<select id="selectByAnimalNum" resultType="animalInfo" parameterType="int">
+		SELECT * FROM animalInfoTbl 
+ 		WHERE animalNum=#{animalNum}
+ 	</select>
+	
+	<update id="addViewCount" parameterType="animalInfo"> 
+		UPDATE animalInfoTbl SET viewCount = #{viewCount}+1 
+		WHERE animalNum=#{animalNum} 
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+	<sql id="selectAllMember">
+		select * from userTbl	
+	</sql>
+	
+	<select id="selectAll" resultType="user">
+		<include refid="selectAllMember"/>
+		order by id ASC
+	</select>
+	
+	<select id="selectByEmail" resultType="user" parameterType="String">
+		<include refid="selectAllMember"/>
+		where email=#{email}
+	</select>
+	
+	<select id="selectById" resultType="user" parameterType="String">
+		<include refid="selectAllMember"/>
+		where id=#{id}
+	</select>
+	
+	<insert id="insertMember" parameterType="user">
+		insert into userTbl
+		values(#{id},#{password},#{name},#{email},#{phone},0)
+	</insert>
+	
+	
 	
 </mapper>

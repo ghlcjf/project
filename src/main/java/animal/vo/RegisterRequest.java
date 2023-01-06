@@ -1,23 +1,18 @@
 package animal.vo;
 
-public class User {
-	 private String id;
-	 private String password;
-	 private String name;
-	 private String email;
-	 private String phone;
-	 private int admin;
-	 
-	 
-	public User(String id, String password, String name, String email, String phone, int admin) {
-		super();
-		this.id = id;
-		this.password = password;
-		this.name = name;
-		this.email = email;
-		this.phone = phone;
-		this.admin = admin;
-	}
+public class RegisterRequest {
+
+	private String id;
+	private String password;
+	private String confirmPassword;
+	private String name;
+	private String email;
+	private String phone;
+	private int admin;
+	
+	public boolean isPasswordEqualToConfirmPassword() {
+		return password.equals(confirmPassword);
+	}	
 	public String getId() {
 		return id;
 	}
@@ -29,6 +24,12 @@ public class User {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
 	}
 	public String getName() {
 		return name;
@@ -54,8 +55,9 @@ public class User {
 	public void setAdmin(int admin) {
 		this.admin = admin;
 	}
-	 
-	 
-	 
-
+	
+	
+	
+	
+	
 }

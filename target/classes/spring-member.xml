@@ -20,6 +20,14 @@
 	
 	<bean id="selectAllFreeBoardList" class="animal.service.SelectAllFreeBoardListService"></bean>
 	
+	<!--로그인-->
+	<bean id="loginService" class="animal.service.LoginService">
+		<property name="animalDao" ref="animalDao"/>
+	</bean>
 	
+	<!--회원가입-->
+	<bean id="memberRegSvc" class="animal.service.MemberRegisterService">
+		<constructor-arg ref="animalDao"/>
+	</bean>
 
 </beans>

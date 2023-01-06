@@ -29,4 +29,34 @@
 	<bean id="InsertFreeCommentController" class="animal.controller.InsertFreeCommentController">
 		<property name="animalDao" ref="animalDao"></property>
 	</bean>
+	
+	<!-- 이슈 -->
+	<bean id="issueController" class="animal.controller.IssueController" />
+	<bean id="issueCommentController" class="animal.controller.IssueCommentController" />
+	<bean id="issueWriteController" class="animal.controller.IssueWriteController" />
+	
+	
+	
+	
+	<!-- 동물 소개 -->
+	
+	<bean id="animalInfoController" class="animal.controller.AnimalInfoController">
+		<property name="animalDao" ref="animalDao"></property>
+	</bean>
+	
+	
+	<!--로그인 컨트롤러 -->
+	<bean id="loginController" class="animal.controller.LoginController">
+			<property name="loginService" ref="loginService"/>
+	</bean>
+	<bean id="logoutController" class="animal.controller.LogoutController"/>
+	
+	<!--회원가입 컨트롤러 -->	
+	<bean id="registerController" class="animal.controller.RegisterController">
+		<property name="memberRegisterService" ref="memberRegSvc"/>
+	</bean>		
+	<bean class="animal.commons.CommonExceptionHandler"></bean>
+	
+	
+	
 </beans>
